@@ -3,6 +3,7 @@ import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/dashboard";
+import Profile from "./pages/profile";
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

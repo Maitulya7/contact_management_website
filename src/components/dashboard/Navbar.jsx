@@ -14,7 +14,7 @@ const Navbar = () => {
   const isLoggedIn = localStorage.getItem("access-token") !== null;
 
   const handleProfileClick = () => {
-    // Handle profile click action
+    Navigate("/profile")
   };
 
   const handleLogout = () => {
@@ -27,7 +27,7 @@ const Navbar = () => {
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link
-            to="/"
+            to="/dashboard"
             style={{
               textDecoration: "none",
               color: "white",

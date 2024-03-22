@@ -1,43 +1,68 @@
+import { useEffect } from "react";
 import Lottie from "lottie-react";
 import animationData from "../../../public/dashboard_animation.json";
-import { Box, Typography } from "@mui/material";
-import DataGridDemo from "./dataGrid";
+import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import ContactTableData from "../../components/dashboard/dataGrid";
 
 const Hero = () => {
   const isLoggedIn = localStorage.getItem("access-token") !== null;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("access-token");
+        await axios.get("http://localhost:5001/api/contacts", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [isLoggedIn]);
+
   return (
-    <>
+    <Box
+      sx={{
+        height: "60vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
+      <Typography variant="h4">
+        All Contacts
+      </Typography>
       {isLoggedIn ? (
-        <DataGridDemo/>
+        <ContactTableData />
       ) : (
-        <Box
-          sx={{
-            maxHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            overflow: "hidden",
-            flexDirection: "column",
-          }}
-        >
-          <Typography variant="h4" sx={{ marginTop: "30px" }}>
-            Please Login or Register to perform actions
+        <>
+          <Typography variant="h6">
+            To perform actions, please login or register.
           </Typography>
-          <Box
-            sx={{
-              maxHeight: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              overflow: "hidden",
-            }}
-          >
+          <Box sx={{ width: "100%", maxWidth: "500px" }}>
             <Lottie animationData={animationData} autoplay loop />
           </Box>
-        </Box>
+          <Box>
+            <Button variant="contained" component={Link} to="/login">
+              Login
+            </Button>
+            <Button variant="contained" component={Link} to="/register">
+              Register
+            </Button>
+          </Box>
+        </>
       )}
-    </>
+    </Box>
   );
 };
 
