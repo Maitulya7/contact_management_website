@@ -1,6 +1,7 @@
 import Lottie from "lottie-react";
 import animationData from "../../../public/dashboard_animation.json";
 import { Box, Typography } from "@mui/material";
+import DataGridDemo from "./dataGrid";
 
 const Hero = () => {
   const isLoggedIn = localStorage.getItem("access-token") !== null;
@@ -8,7 +9,7 @@ const Hero = () => {
   return (
     <>
       {isLoggedIn ? (
-        "hello"
+        <DataGridDemo/>
       ) : (
         <Box
           sx={{
