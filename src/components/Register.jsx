@@ -19,7 +19,9 @@ import {
 import image from "/register_bg.svg";
 import HeaderComponent from "./landingPageSections/Heder";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -27,10 +29,12 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(false);
 
+  const navigate = useNavigate()
+
   const handleRegister = () => {
     try {
       axios
-        .post("http://localhost:5001/api/users/register", {
+        .post(`${BASE_URL}/api/users/register`, {
           username,
           email,
           password,
@@ -38,6 +42,7 @@ const Register = () => {
         .then((res) => {
           console.log(res.data);
           setStatus(true);
+          navigate("/login")
         })
         .catch((err) => {
           console.log(err);

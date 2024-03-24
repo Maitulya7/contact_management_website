@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import Button from "@mui/material/Button";
 import { Stack } from "@mui/material";
+import { BASE_URL } from "../../config";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -18,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const token = localStorage.getItem("access-token");
     axios
-      .get("http://localhost:5001/api/users/current", {
+      .get(`${BASE_URL}/api/users/current`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

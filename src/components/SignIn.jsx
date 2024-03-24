@@ -20,6 +20,7 @@ import HeaderComponent from "./landingPageSections/Heder";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const SignIn = () => {
   const handleSignIn = () => {
     try {
       axios
-        .post("http://localhost:5001/api/users/login", {
+        .post(`${BASE_URL}/api/users/login`, {
           username,
           email,
           password,
